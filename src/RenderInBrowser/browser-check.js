@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // Mobile Browsers
 export const isMobile = () => {
   const ua = (navigator || {}).userAgent;

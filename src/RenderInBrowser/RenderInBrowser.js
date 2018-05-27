@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import browserCheck from './browser-check';
 
-const getBrowsersArr = () => {
+const getAllDefinedBrowsers = () => {
   const browsers = [
     { name: 'mobile', isCurrentBrowser: browserCheck.isMobile() },
     { name: 'chrome', isCurrentBrowser: browserCheck.isChrome() },
@@ -16,15 +16,21 @@ const getBrowsersArr = () => {
 };
 
 const shouldRenderForBrowser = (props, browsers) => {
+  const { only, except, all, none } = props;
   const allBrowsers = browserCheck.allBrowsers;
 
   let restrictedBrowsers = [];
   let allowedBrowsers = [];
 
-  const only = props.only === true || typeof props.only === 'undefined';
-  const except = props.except === true;
+  const currentBrowser = browsers.find(
+    (browser) => browser.isCurrentBrowser === true
+  );
 
-  if (except) {
+  if (all) {
+    return true;
+  } else if (none) {
+    return false;
+  } else if (except) {
     allBrowsers.forEach((browser) => {
       if (props[browser]) restrictedBrowsers.push(browser);
       else allowedBrowsers.push(browser);
@@ -34,26 +40,26 @@ const shouldRenderForBrowser = (props, browsers) => {
       if (props[browser]) allowedBrowsers.push(browser);
       else restrictedBrowsers.push(browser);
     });
-  } else {
-    // never goes here
-    allowedBrowsers = allBrowsers.slice();
+  } else if (!all && !only && !except && !none) {
+    allBrowsers.forEach((browser) => {
+      if (props[browser]) allowedBrowsers.push(browser);
+      else restrictedBrowsers.push(browser);
+    });
   }
-
-  const currentBrowser = browsers.find(
-    (browser) => browser.isCurrentBrowser === true
-  );
+  
   if (currentBrowser && restrictedBrowsers.includes(currentBrowser.name))
     return false;
   else if (currentBrowser && allowedBrowsers.includes(currentBrowser.name))
     return true;
-  else return false;
+  
+  return false;
 };
 
 const RenderInBrowser = (props) => {
   const { children } = props;
-  const browsers = getBrowsersArr();
+  const browsers = getAllDefinedBrowsers();
   const shouldRender = shouldRenderForBrowser(props, browsers);
-
+  
   if (shouldRender) {
     return children;
   } else {
@@ -72,6 +78,8 @@ RenderInBrowser.propTypes = {
   mobile: PropTypes.bool,
   except: PropTypes.bool,
   only: PropTypes.bool,
+  all: PropTypes.bool,
+  none: PropTypes.bool,
   children: PropTypes.node
 };
 
@@ -83,7 +91,11 @@ RenderInBrowser.defaultProps = {
   ie: false,
   edge: false,
   mobile: false,
-  blink: false
+  blink: false,
+  except: false,
+  only: false,
+  all: false,
+  none: false
 };
 
 export default RenderInBrowser;
