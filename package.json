@@ -1,6 +1,7 @@
 {
   "name": "react-render-in-browser",
   "version": "0.0.1",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
     "clean": "rm -rf dist",
