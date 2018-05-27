@@ -1,7 +1,8 @@
 {
   "name": "react-render-in-browser",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "./dist/index.js",
+  "description": "A React component to render browser specific content",
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
     "clean": "rm -rf dist",
