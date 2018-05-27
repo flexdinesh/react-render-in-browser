@@ -21,7 +21,7 @@ With **RenderInBrowser** component you can render content specific to browsers. 
 ## Install
 
 ```
-$ npm install --save browser-or-node
+$ npm install --save react-render-in-browser
 ```
 
 ## Usage
