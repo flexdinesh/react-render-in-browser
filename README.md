@@ -54,6 +54,9 @@ The div `I like Chrome and Firefox` will be rendered only in Chrome or Firefox.
 
 ## API
 
+- [Browsers](#browsers)
+- [Conditions](#conditions)
+
 ### Browsers
 
 The following browsers are supported as prop types and they are **case-sensitive**.
