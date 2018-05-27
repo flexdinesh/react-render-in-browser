@@ -12,7 +12,7 @@ Ever wanted to put up a banner for all your IE users and ask them to try your si
 
 With **RenderInBrowser** component you can render content specific to browsers. 🎉
 
-```js
+```jsx
 <RenderInBrowser ie only>
   <div>All the magic tricks in this site work best in Chrome/Firefox!</div>
 </RenderInBrowser>
@@ -26,8 +26,7 @@ $ npm install --save react-render-in-browser
 
 ## Usage
 
-```js
-
+```jsx
 import RenderInBrowser from 'react-render-in-browser';
 
 const Example = () => {
@@ -45,7 +44,6 @@ const Example = () => {
     </div>
   );
 };
-
 ```
 
 The div `Ugh, our super duper animation won't work in IE` will be rendered only in IE.
@@ -79,7 +77,7 @@ The following conditions are supported as prop types are they are **case-sensiti
 
 When **only** is used, the children will render only in browsers passed as props.
 
-```js
+```jsx
 <RenderInBrowser ie edge only>
   <div>Renderded only in IE and Edge</div>
 </RenderInBrowser>
@@ -89,7 +87,7 @@ When **only** is used, the children will render only in browsers passed as props
 
 When **except** is used, the children will render in all browsers except those that are passed as props.
 
-```js
+```jsx
 <RenderInBrowser except safari>
   <div>Rendered in all except safari</div>
 </RenderInBrowser>
