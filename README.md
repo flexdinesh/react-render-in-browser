@@ -71,7 +71,7 @@ Note that `mobile` is a type of browser. Desktop chrome and mobile chrome are no
 
 ### Conditions
 
-The following conditions are supported as prop types are they are **case-sensitive**.
+The following conditions are supported as prop types and they are **case-sensitive**.
 
 #### only
 
