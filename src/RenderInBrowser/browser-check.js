@@ -27,15 +27,12 @@ export const isSafari = () => {
 export const isIE = () => /*@cc_on!@*/false || !!document.documentMode;
 
 // Edge 20+
-export const isEdge = () => !isIE && !!window.StyleMedia;
+export const isEdge = () => !isIE() && !!window.StyleMedia;
 
 // Chrome 1+
 export const isChrome = () => !!window.chrome && !!window.chrome.webstore;
 
-// Blink engine detection
-export const isBlink = () => (isChrome || isOpera) && !!window.CSS;
-
-export const allBrowsers = ['chrome', 'firefox', 'safari', 'opera', 'ie', 'edge', 'blink', 'mobile'];
+export const allBrowsers = ['chrome', 'firefox', 'safari', 'opera', 'ie', 'edge', 'mobile'];
 
 export default {
   isOpera,
@@ -44,7 +41,6 @@ export default {
   isIE,
   isEdge,
   isChrome,
-  isBlink,
   isMobile,
   allBrowsers
 }
