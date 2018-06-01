@@ -1,6 +1,6 @@
 {
   "name": "react-render-in-browser",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "main": "./dist/index.js",
   "description": "A React component to render browser specific content",
   "scripts": {
