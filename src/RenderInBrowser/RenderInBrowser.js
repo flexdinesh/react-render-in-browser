@@ -1,71 +1,60 @@
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import browserCheck from './browser-check';
 
-const getAllDefinedBrowsers = () => {
-  const browsers = [
-    { name: 'mobile', isCurrentBrowser: browserCheck.isMobile() },
-    { name: 'chrome', isCurrentBrowser: browserCheck.isChrome() },
-    { name: 'firefox', isCurrentBrowser: browserCheck.isFirefox() },
-    { name: 'safari', isCurrentBrowser: browserCheck.isSafari() },
-    { name: 'opera', isCurrentBrowser: browserCheck.isOpera() },
-    { name: 'ie', isCurrentBrowser: browserCheck.isIE() },
-    { name: 'edge', isCurrentBrowser: browserCheck.isEdge() },
-    { name: 'blink', isCurrentBrowser: browserCheck.isBlink() }
-  ];
-  return browsers;
-};
-
-const shouldRenderForBrowser = (props, browsers) => {
-  const { only, except, all, none } = props;
-  const allBrowsers = browserCheck.allBrowsers;
-
-  let restrictedBrowsers = [];
-  let allowedBrowsers = [];
-
-  const currentBrowser = browsers.find(
-    (browser) => browser.isCurrentBrowser === true
-  );
-
-  if (all) {
-    return true;
-  } else if (none) {
-    return false;
-  } else if (except) {
-    allBrowsers.forEach((browser) => {
-      if (props[browser]) restrictedBrowsers.push(browser);
-      else allowedBrowsers.push(browser);
-    });
-  } else if (only) {
-    allBrowsers.forEach((browser) => {
-      if (props[browser]) allowedBrowsers.push(browser);
-      else restrictedBrowsers.push(browser);
-    });
-  } else if (!all && !only && !except && !none) {
-    allBrowsers.forEach((browser) => {
-      if (props[browser]) allowedBrowsers.push(browser);
-      else restrictedBrowsers.push(browser);
-    });
+class RenderInBrowser extends Component {
+  constructor(props) {
+    super(props);
+    this.currentBrowser = RenderInBrowser.getCurrentBrowser();
   }
-  
-  if (currentBrowser && restrictedBrowsers.includes(currentBrowser.name))
-    return false;
-  else if (currentBrowser && allowedBrowsers.includes(currentBrowser.name))
-    return true;
-  
-  return false;
-};
 
-const RenderInBrowser = (props) => {
-  const { children } = props;
-  const browsers = getAllDefinedBrowsers();
-  const shouldRender = shouldRenderForBrowser(props, browsers);
-  
-  if (shouldRender) {
-    return children;
-  } else {
-    return null;
+  /* istanbul ignore next */
+  static getCurrentBrowser () {
+    const browsers = [
+      { name: 'mobile', isCurrentBrowser: browserCheck.isMobile() },
+      { name: 'chrome', isCurrentBrowser: browserCheck.isChrome() },
+      { name: 'firefox', isCurrentBrowser: browserCheck.isFirefox() },
+      { name: 'safari', isCurrentBrowser: browserCheck.isSafari() },
+      { name: 'opera', isCurrentBrowser: browserCheck.isOpera() },
+      { name: 'ie', isCurrentBrowser: browserCheck.isIE() },
+      { name: 'edge', isCurrentBrowser: browserCheck.isEdge() }
+    ];
+
+    const currentBrowser = browsers.filter(browser => browser.isCurrentBrowser === true);
+    if (currentBrowser.length && currentBrowser.length === 1) return currentBrowser[0].name;
+    else undefined;
   }
-};
+
+  shouldRenderForBrowser() {
+    const { only, except, all, none } = this.props;
+    
+    if (all) return true;
+    else if (none) return false;
+    
+    const browsersInProps = [];
+    /* eslint-disable no-undef */
+    for(let prop in this.props) {
+      if (this.props.hasOwnProperty(prop) && this.props[prop] === true)
+        browsersInProps.push(prop);
+    }
+    /* eslint-enable no-undef */
+
+    if (only) return browsersInProps.includes(this.currentBrowser);
+    else if (except) return !browsersInProps.includes(this.currentBrowser);
+    else return browsersInProps.includes(this.currentBrowser);
+  }
+
+  render() {
+    const { children } = this.props;
+    const shouldRender = this.shouldRenderForBrowser();
+    
+    if (shouldRender) {
+      return children;
+    } else {
+      return null;
+    }
+  }
+}
 
 RenderInBrowser.propTypes = {
   chrome: PropTypes.bool,
