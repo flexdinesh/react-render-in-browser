@@ -67,8 +67,7 @@ The following browsers are supported as prop types and they are **case-sensitive
 4. opera
 5. ie
 6. edge
-7. blink
-8. mobile
+7. mobile
 
 Note that `mobile` is a type of browser. Desktop chrome and mobile chrome are not the same although they share the same name. They are built independent of each other and what necessarily works in Desktop Chrome might not necessarily work in mobile Chrome. Most mobile browsers behave the same and identifying them apart is a bit tricky and thus we're grouping all mobile browsers into one.
 
