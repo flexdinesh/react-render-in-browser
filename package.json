@@ -50,9 +50,6 @@
     "react": ">= 16.3.0",
     "react-dom": ">= 16.3.0"
   },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
-  },
   "keywords": [
     "react",
     "react package",
@@ -61,6 +58,9 @@
     "npm",
     "component"
   ],
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  },
   "jest": {
     "modulePaths": [
       "./src"
