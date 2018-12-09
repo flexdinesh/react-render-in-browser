@@ -14,22 +14,25 @@
     "prepublish": "npm run clean && npm run test && npm run build"
   },
   "dependencies": {
+    "browser-or-node": "^1.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "babel-jest": "^23.0.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "chai": "^4.1.2",
-    "clean-webpack-plugin": "^0.1.16",
-    "css-loader": "^0.28.0",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^2.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.9.0",
+    "eslint": "^5.10.0",
     "eslint-plugin-react": "^7.4.0",
     "jest": "^23.0.0",
     "node-sass": "^4.7.2",
@@ -37,11 +40,18 @@
     "react-hot-loader": "next",
     "react-test-renderer": "^16.0.0",
     "sass-loader": "^7.0.1",
-    "sinon": "^5.0.10",
-    "style-loader": "^0.21.0",
+    "sinon": "^7.1.1",
+    "style-loader": "^0.23.1",
     "webpack": "^4.9.1",
-    "webpack-cli": "^2.1.4",
+    "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.4"
+  },
+  "peerDependencies": {
+    "react": ">= 16.3.0",
+    "react-dom": ">= 16.3.0"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   },
   "keywords": [
     "react",

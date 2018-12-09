@@ -48,25 +48,26 @@ export default () => ({
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react']
+            }
           }
         ]
       },
       {
         test: /\.(scss)$/,
-        loader: 'style-loader!css-loader!sass-loader',
-      },
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: ['.js', '.jsx', '.scss']
   },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   optimization: {
-    namedModules: true,
+    namedModules: true
   }
 });

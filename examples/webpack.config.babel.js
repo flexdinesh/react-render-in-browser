@@ -5,7 +5,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 export default () => ({
   mode: 'production',
   entry: {
-    index: path.join(__dirname, './index.js'),
+    index: path.join(__dirname, './index.js')
   },
 
   output: {
@@ -21,23 +21,26 @@ export default () => ({
 
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react']
+            }
           }
         ]
       },
       {
         test: /\.(scss)$/,
-        loader: 'style-loader!css-loader!sass-loader',
-      },
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: ['.js', '.jsx', '.scss']
   },
-  
+
   plugins: [
     // Clean dist folder
-    new CleanWebpackPlugin(['./dist/build.js']),
+    new CleanWebpackPlugin(['./dist/build.js'])
   ]
 });

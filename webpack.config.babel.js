@@ -5,7 +5,7 @@ const packageJson = require('./package.json');
 export default () => ({
   mode: 'production',
   entry: {
-    index: path.join(__dirname, 'src/index.js'),
+    index: path.join(__dirname, 'src/index.js')
   },
 
   output: {
@@ -13,6 +13,7 @@ export default () => ({
     filename: '[name].js',
     library: packageJson.name,
     libraryTarget: 'umd',
+    globalObject: 'this'
   },
 
   module: {
@@ -23,26 +24,32 @@ export default () => ({
         include: path.join(__dirname, 'src'),
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react']
+            }
           }
         ]
       },
       {
         test: /\.(scss)$/,
-        loader: 'style-loader!css-loader!sass-loader',
-      },
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
   },
-  
+
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: ['.js', '.jsx', '.scss']
   },
 
-  plugins: [
-    new CleanWebpackPlugin(['dist/*.*']),
-  ],
+  externals: {
+    react: 'react',
+    reactDOM: 'react-dom'
+  },
+
+  plugins: [new CleanWebpackPlugin(['dist/*.*'])],
   optimization: {
-    splitChunks: { 
+    splitChunks: {
       name: 'vendor',
       minChunks: 2
     }

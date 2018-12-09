@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 // Mobile Browsers
 export const isMobile = () => {
-  const ua = (navigator || {}).userAgent;
+  const ua = (window.navigator || {}).userAgent;
   if (ua) {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
   }
@@ -30,7 +30,7 @@ export const isIE = () => /*@cc_on!@*/false || !!document.documentMode;
 export const isEdge = () => !isIE() && !!window.StyleMedia;
 
 // Chrome 1+
-export const isChrome = () => !!window.chrome && !!window.chrome.webstore;
+export const isChrome = () => !!window.chrome && !isOpera();
 
 export const allBrowsers = ['chrome', 'firefox', 'safari', 'opera', 'ie', 'edge', 'mobile'];
 
