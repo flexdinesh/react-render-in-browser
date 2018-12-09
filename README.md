@@ -95,7 +95,6 @@ When **except** is used, the children will render in all browsers except those t
 </RenderInBrowser>
 ```
 
-
 ## License
 
 MIT © Dinesh Pandiyan
