@@ -8,6 +8,10 @@
 
 ## Released
 
+### 1.1.1 (19 Jan 2019)
+
+- No code change. Just added repo URL to npm package for backlinking to GitHub
+
 ### 1.1.0 (9 Dec 2018)
 
 - Fix: Chrome browser detection.

@@ -58,6 +58,10 @@
     "npm",
     "component"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexdinesh/react-render-in-browser.git"
+  },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
   },
