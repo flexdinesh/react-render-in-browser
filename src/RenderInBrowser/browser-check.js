@@ -1,7 +1,10 @@
 /* istanbul ignore file */
+
+const getUa = () => (window.navigator || {}).userAgent;
+
 // Mobile Browsers
 export const isMobile = () => {
-  const ua = (window.navigator || {}).userAgent;
+  const ua = getUa()
   if (ua) {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
   }
@@ -27,7 +30,19 @@ export const isSafari = () => {
 export const isIE = () => /*@cc_on!@*/false || !!document.documentMode;
 
 // Edge 20+
-export const isEdge = () => !isIE() && !!window.StyleMedia;
+export const isEdge = () => {
+  const isEdgeHtml = !isIE() && !!window.StyleMedia;
+  if (isEdgeHtml) {
+    return true
+  }
+
+  const ua = getUa()
+  if (ua) {
+    return (/Edg/i.test(ua))
+  }
+
+  return false
+}
 
 // Chrome 1+
 export const isChrome = () => !!window.chrome && !isOpera();
