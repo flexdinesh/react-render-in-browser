@@ -45,7 +45,7 @@ export const isEdge = () => {
 }
 
 // Chrome 1+
-export const isChrome = () => !!window.chrome && !isOpera();
+export const isChrome = () => !!window.chrome && !isOpera() && !isEdge();
 
 export const allBrowsers = ['chrome', 'firefox', 'safari', 'opera', 'ie', 'edge', 'mobile'];
 
